@@ -86,7 +86,7 @@ export default function ChatPage() {
       <form onSubmit={handleSubmit} className="chat-input">
         <input
           name="message"
-          placeholder="Message Bot AI…"
+          placeholder="Message Bot AI..."
         />
         <button type="submit">Ask</button>
         <button type="button" onClick={handleSave}>
