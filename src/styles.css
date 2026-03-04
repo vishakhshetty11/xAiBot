@@ -1,0 +1,469 @@
+/* ================= GLOBAL ================= */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #1f2937;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  background: #ede9fe;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #7c3aed;
+}
+
+/* Hamburger */
+
+.hamburger {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  width: 220px;
+  background: #f3e8ff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+/* Mac dots */
+
+.mac-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.mac-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+/* New Chat Row */
+
+.new-chat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e9d5ff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.logo-icon {
+  margin-right: 6px;
+}
+
+.edit-icon {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Past Conversations Button */
+
+.past-chat-btn {
+  background: #d8b4fe;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+  width: fit-content;
+}
+
+/* ================= MAIN SECTION ================= */
+
+.main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  background: #ede9fe;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= WELCOME SCREEN ================= */
+
+.welcome-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.welcome-section h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.bot-icon {
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+
+/* Suggestions Grid */
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.suggestion-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-3px);
+}
+
+.suggestion-card h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.suggestion-card p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: gray;
+}
+
+/* ================= CHAT SECTION ================= */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.message {
+  margin: 12px 0;
+  padding: 12px 15px;
+  border-radius: 12px;
+  position: relative;
+  max-width: 70%;
+  font-size: 14px;
+}
+
+.message.user {
+  background: #c7d2fe;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background: #d8b4fe;
+}
+
+.message p {
+  margin: 0;
+}
+
+/* Reaction Hover */
+
+.reaction {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.reaction button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reaction button.active {
+  transform: scale(1.2);
+}
+/* ================= INPUT ================= */
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 16px;
+  background: #c4b5fd;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-input button:hover {
+  background: #a78bfa;
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.stars span {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.stars .active {
+  color: gold;
+}
+
+.modal textarea {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+/* ================= HISTORY PAGE ================= */
+
+.history-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.history-page h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.no-history {
+  text-align: center;
+  margin-top: 40px;
+  color: #555;
+}
+
+/* Section Title */
+
+.history-section-title {
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Conversation Card */
+
+.history-card {
+  background: #d8b4fe;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+}
+
+/* Message Block */
+
+.history-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+/* Avatar */
+
+.history-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+/* Content */
+
+.history-content {
+  flex: 1;
+}
+
+.history-content strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.history-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.history-time {
+  font-size: 11px;
+  color: #444;
+  margin-top: 4px;
+}
+
+/* Rating */
+
+.history-rating {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.history-rating span {
+  color: gold;
+  font-size: 16px;
+  margin-left: 6px;
+}
+
+/* Feedback */
+
+.history-feedback {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Spacing between cards */
+
+.history-card:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+  .history-page {
+    padding: 0 10px;
+  }
+
+  .history-card {
+    padding: 15px;
+  }
+
+  .history-message {
+    gap: 8px;
+  }
+
+  .history-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .history-content p {
+    font-size: 13px;
+  }
+
+}
+
+/* ================= MOBILE ================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 10;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .suggestions {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+}
