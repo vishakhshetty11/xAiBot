@@ -14,13 +14,15 @@ export default function App() {
 
       <div className="main-section">
         {/* Navbar */}
-        <div className="navbar">
-          <button className="hamburger" onClick={() => setOpen(true)}>
-            ☰
-          </button>
-          <h1>Bot AI</h1>
-        </div>
 
+        <header>
+          <div className="navbar">
+            <button className="hamburger" onClick={() => setOpen(true)}>
+              ☰
+            </button>
+            <h1>Bot AI</h1>
+          </div>
+        </header>
         <div className="content">
           <Routes>
             <Route path="/" element={<ChatPage />} />
