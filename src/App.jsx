@@ -18,7 +18,7 @@ export default function App() {
           <button className="hamburger" onClick={() => setOpen(true)}>
             ☰
           </button>
-          <h2>Bot AI</h2>
+          <h1>Bot AI</h1>
         </div>
 
         <div className="content">
