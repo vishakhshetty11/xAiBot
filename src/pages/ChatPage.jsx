@@ -1,11 +1,10 @@
 import { useState } from "react";
 import sampleData from "../data/sampleData";
 import ChatMessage from "../components/ChatMessage";
-import RatingModal from "../components/RatingModal";
 
 export default function ChatPage() {
+
     const [messages, setMessages] = useState([]);
-    const [showModal, setShowModal] = useState(false);
 
     const suggestions = [
         "Hi, what is the weather?",
@@ -13,57 +12,83 @@ export default function ChatPage() {
         "Hi, what is the temperature?",
         "Hi, how are you?"
     ];
-    // Find response from sample data
-    const getBotReply = (input) => {
-        const found = sampleData.find(
-            (item) =>
-                item.question.toLowerCase().trim() ===
-                input.toLowerCase().trim()
+
+    const getBotReply = (question) => {
+
+        const match = sampleData.find(
+            (item) => item.question.toLowerCase() === question.toLowerCase()
         );
 
-        return found
-            ? found.response
+        return match
+            ? match.response
             : "Sorry, Did not understand your query!";
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const input = e.target.message.value;
+
         if (!input) return;
 
-        const userMsg = { sender: "user", text: input };
+        const userMsg = {
+            sender: "user",
+            text: input
+        };
 
         const botMsg = {
             sender: "bot",
             text: getBotReply(input),
             reaction: null,
+            rating: null,
+            feedback: null
         };
 
-        setMessages((prev) => [...prev, userMsg, botMsg]);
+        setMessages(prev => [...prev, userMsg, botMsg]);
 
         e.target.reset();
     };
 
-    const handleSave = () => {
-        setShowModal(true);
+    // ⭐ update reaction / rating / feedback
+    const handleReact = (index, data) => {
+
+        setMessages(prev =>
+            prev.map((msg, i) =>
+                i === index ? { ...msg, ...data } : msg
+            )
+        );
+
     };
 
-    const saveConversation = (rating, feedback) => {
+    const handleSave = () => {
+
         const history = JSON.parse(localStorage.getItem("history")) || [];
-        history.push({ messages, rating, feedback, date: new Date() });
+
+        history.push({
+            messages,
+            date: new Date()
+        });
+
         localStorage.setItem("history", JSON.stringify(history));
+
         setMessages([]);
-        setShowModal(false);
     };
 
     return (
         <div className="chat-wrapper">
+
             {messages.length === 0 && (
+
                 <div className="welcome-section">
+
                     <h2>How Can I Help You Today?</h2>
+
                     <div className="bot-icon">🧠</div>
 
                     <div className="suggestions">
+
                         {suggestions.map((text, index) => (
+
                             <div
                                 key={index}
                                 className="suggestion-card"
@@ -72,41 +97,66 @@ export default function ChatPage() {
                                         { sender: "user", text },
                                         {
                                             sender: "bot",
-                                            text:
-                                                sampleData[text] ||
-                                                "Sorry, Did not understand your query!"
+                                            text: getBotReply(text),
+                                            reaction: null,
+                                            rating: null,
+                                            feedback: null
                                         }
                                     ])
                                 }
                             >
+
                                 <h4>{text}</h4>
                                 <p>Get immediate AI generated response</p>
+
                             </div>
+
                         ))}
+
                     </div>
+
                 </div>
             )}
 
             {messages.length > 0 && (
+
                 <div className="messages">
+
                     {messages.map((msg, index) => (
-                        <ChatMessage key={index} msg={msg} />
+
+                        <ChatMessage
+                            key={index}
+                            msg={msg}
+                            index={index}
+                            onReact={handleReact}
+                        />
+
                     ))}
+
                 </div>
+
             )}
 
             <form onSubmit={handleSubmit} className="chat-input">
+
                 <input
                     name="message"
                     placeholder="Message Bot AI..."
                 />
-                <button type="submit">Ask</button>
-                <button type="button" onClick={handleSave}>
+
+                <button type="submit">
+                    Ask
+                </button>
+
+                <button
+                    type="button"
+                    onClick={handleSave}
+                >
                     Save
                 </button>
+
             </form>
 
-            {showModal && <RatingModal onSubmit={saveConversation} />}
         </div>
     );
 }

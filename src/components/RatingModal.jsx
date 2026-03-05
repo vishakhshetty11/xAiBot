@@ -1,36 +1,41 @@
 import { useState } from "react";
 
-export default function RatingModal({ onSubmit }) {
-  const [rating, setRating] = useState(0);
-  const [feedback, setFeedback] = useState("");
+export default function RatingModal({ close, onSubmit }) {
+
+  const [text, setText] = useState("");
+
+  const handleSubmit = () => {
+    if (text.trim() === "") return;
+    onSubmit(text);
+  };
 
   return (
     <div className="modal">
-      <div className="modal-content">
-        <h3>Rate this Conversation</h3>
 
-        <div className="stars">
-          {[1,2,3,4,5].map(num => (
-            <span
-              key={num}
-              onClick={() => setRating(num)}
-              className={num <= rating ? "active" : ""}
-            >
-              ★
-            </span>
-          ))}
-        </div>
+      <div className="modal-content">
+
+        <h3>Give Feedback</h3>
 
         <textarea
-          placeholder="Write your feedback..."
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
+          placeholder="Write feedback..."
+          value={text}
+          onChange={(e)=>setText(e.target.value)}
         />
 
-        <button onClick={() => onSubmit(rating, feedback)}>
-          Submit
-        </button>
+        <div style={{marginTop:"10px",display:"flex",gap:"10px"}}>
+
+          <button onClick={handleSubmit}>
+            Submit
+          </button>
+
+          <button onClick={close}>
+            Cancel
+          </button>
+
+        </div>
+
       </div>
+
     </div>
   );
 }

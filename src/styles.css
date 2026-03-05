@@ -219,9 +219,39 @@ body {
   font-size: 14px;
 }
 
-.reaction button.active {
-  transform: scale(1.2);
+.reaction-buttons{
+  display:none;
+  gap:8px;
+  margin-top:6px;
 }
+
+.message.bot:hover .reaction-buttons{
+  display:flex;
+}
+
+.reaction-buttons button{
+  background:none;
+  border:1px solid #aaa;
+  border-radius:5px;
+  padding:3px 6px;
+  cursor:pointer;
+}
+
+.reaction-buttons button.active{
+  background:#7c3aed;
+  color:white;
+}
+
+.star-rating span{
+  font-size:20px;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+.star-rating span.active{
+  color:gold;
+}
+
 /* ================= INPUT ================= */
 
 .chat-input {
