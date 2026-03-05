@@ -62,7 +62,7 @@ export default function ChatMessage({ msg, index, onReact }) {
     return (
         <div className="message bot">
 
-            <strong>Soul AI</strong>
+            <span>Soul AI</span>
 
             <p>{msg.text}</p>
 
